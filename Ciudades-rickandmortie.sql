@@ -72,7 +72,36 @@ ALTER TABLE union_pais_personaje
     REFERENCES tabla_personajes(id_personaje)
     MATCH SIMPLE
 ;
+
+CREATE TABLE IF NOT EXISTS tabla_fronteras
+(
+    id_frontera INTEGER NOT NULL,
+    nombre_frontera VARCHAR(50) NOT NULL,
+    longitud_frontera INTEGER NOT NULL,
+    descripcion_frontera VARCHAR(50) NOT NULL,
+    tipo_frontera VARCHAR(50) NOT NULL,
+    PRIMARY KEY(id_frontera)
+);
+
+CREATE TABLE IF NOT EXISTS union_pais_fronteras
+(
+    fk_pais INTEGER NOT NULL,
+    fk_frontera INTEGER NOT NULL,
+    PRIMARY KEY(fk_pais, fk_frontera)
+);
+
+
+ALTER TABLE union_pais_fronteras
+    ADD    FOREIGN KEY (fk_frontera)
+    REFERENCES tabla_fronteras(id_frontera)
+    MATCH SIMPLE
+;
     
+ALTER TABLE union_pais_fronteras
+    ADD    FOREIGN KEY (fk_pais)
+    REFERENCES tabla_pais_español(id_paises)
+    MATCH SIMPLE
+;
 
 -- Create Indexes
 
